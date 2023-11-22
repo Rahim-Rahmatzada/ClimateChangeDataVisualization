@@ -1,20 +1,18 @@
 import tkinter as tk
+from GUI.ButtonCreation import ButtonCreation
+from GUI.TitleBar import TitleBar
+
 
 class ChartUI(tk.Frame):
-    def __init__(self, parent):
-        super().__init__(parent)
+    def __init__(self, parent, menu_ui_instance, close_command):
+        super().__init__(parent, bg='#D4D0C8')  # Set the background color
+        self.menu_ui = menu_ui_instance
+        self.root = parent
+
+        self.title_bar = TitleBar(self.root, "Chart Title", close_command, self.show_menu_ui)
         self.pack(fill="both", expand=True)
-        self.create_widgets()
-
-    def create_widgets(self):
-        # Add widgets for the graph display here
-        self.label = tk.Label(self, text="This is where the graph will be displayed.")
-        self.label.pack(pady=20)
-
-        # Add a back button to return to the main menu
-        self.back_button = tk.Button(self, text="Back to Menu", command=self.show_menu_ui)
-        self.back_button.pack(pady=20)
 
     def show_menu_ui(self):
+        self.title_bar.destroy()  # Destroy the ChartUI's title bar
         self.pack_forget()  # Hide the ChartUI
-        self.show_menu_ui()  # Show the MenuUI
+        self.menu_ui.show_menu_ui()

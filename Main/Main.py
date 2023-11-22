@@ -1,21 +1,28 @@
-from GUI.MenuUI import MenuUI
 import tkinter as tk
+from GUI.MenuUI import MenuUI
+from GUI.ChartUI import ChartUI
 
 
 class MainUI:
 
     def __init__(self):
-        # Initialize the main application window
         self.root = tk.Tk()
+        self.root.geometry("1200x700")
+        self.root.configure(bg='#D4D0C8')
+
+        # Initialize MenuUI and ChartUI without creating a TitleBar inside them
+        self.menu_ui = MenuUI(self.root, self.close_application)
 
 
-        # Initialize MenuUI
-        self.menu_ui = MenuUI(self.root)  # Pass the main application window to the MenuUI
+        # Start with showing the MenuUI
+        self.menu_ui.pack(fill='both', expand=True)
 
         # Additional setup can go here...
 
-        # Start the GUI loop
         self.root.mainloop()
+
+    def close_application(self):
+        self.root.destroy()
 
 
 # Running the MainUI if the script is executed

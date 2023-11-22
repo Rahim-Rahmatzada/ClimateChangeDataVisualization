@@ -1,15 +1,15 @@
 import tkinter as tk
 from GUI.ButtonCreation import ButtonCreation
 from GUI.ChartUI import ChartUI
+from GUI.TitleBar import TitleBar
 
 
-class MenuUI:
-    def __init__(self, root):
+class MenuUI(tk.Frame):
+    def __init__(self, root, close_command):
+        super().__init__(root, bg='#D4D0C8')
         self.root = root
-        # self.root.overrideredirect(True)
-        self.create_custom_titlebar("")
+        self.title_bar = TitleBar(self.root, "Menu Title", close_command)
 
-        self.root.configure(bg='#D4D0C8')
         self.root.geometry("1200x700")
 
         self.create_rectangle_frame()  # Define rectangle_frame before using it
@@ -18,31 +18,7 @@ class MenuUI:
         self.create_button_frame()
         self.create_buttons()
 
-    def create_custom_titlebar(self, title):
-        title_bar = tk.Frame(self.root, bg='darkblue', relief='raised', bd=2)
-        title_bar.pack(side="top", fill="x")
-        title_label = tk.Label(title_bar, text=title, bg='darkblue', fg='white')
-        title_label.pack(side="left", padx=10)
-
-        # Assuming create_button is a method from ButtonCreation class that creates a button
-        # Here we're creating a new ButtonCreation instance just for the close button
-        close_button_creator = ButtonCreation(title_bar)
-        # Setting command for close button to destroy the window
-        close_button_creator.set_command(self.root.destroy)
-        # Now we use the create_button method to create the close button
-        close_button_creator.create_button('X', width=50, height=50)  # Width and height in text units
-        close_button_creator.pack(side="right", padx=10)
-
-        # Allow the window to be moved by dragging the title bar
-        title_bar.bind('<Button-1>', self.get_pos)
-        title_bar.bind('<B1-Motion>', self.move_window)
-
-    def get_pos(self, event):
-        self.xwin = event.x
-        self.ywin = event.y
-
-    def move_window(self, event):
-        self.root.geometry(f'+{event.x_root - self.xwin}+{event.y_root - self.ywin}')
+        self.pack(fill='both', expand=True)
 
     def create_button_frame(self):
         self.button_frame = tk.Frame(self.root, bg='#D4D0C8')
@@ -60,9 +36,16 @@ class MenuUI:
             button.pack(pady=10)
 
     def show_graph_ui(self):
-        # This method gets called when the GRAPHS button is clicked
-        # It will create an instance of the ChartUI class
-        ChartUI(self.root)  # Pass the root window as the parent of ChartUI
+        self.title_bar.destroy()  # Destroy the current title bar
+        self.pack_forget()  # Hide the MenuUI frame
+        self.chart_ui = ChartUI(self.root, self, self.root.destroy)
+        self.chart_ui.pack(fill='both', expand=True)
+
+    def show_menu_ui(self):
+        # This method should re-show the MenuUI frame
+        if hasattr(self, 'chart_ui'):
+            self.chart_ui.pack_forget()
+        self.pack(fill='both', expand=True)
 
     def create_rectangle_frame(self):
         self.rectangle_frame = tk.Frame(self.root, bg='#D4D0C8')
