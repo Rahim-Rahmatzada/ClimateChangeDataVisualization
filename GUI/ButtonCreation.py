@@ -9,6 +9,9 @@ class ButtonCreation(tk.Frame):
         super().__init__(master, bg='black', **kwargs)
         self.custom_font = self.load_custom_font('Fonts', 'w-95-sans-serif.ttf', 12)
 
+        self.bind('<Enter>', self.on_hover)
+        self.bind('<Leave>', self.on_leave)
+
     def load_custom_font(self, font_folder, font_filename, size):
         # First, we register the custom font with the system
 
@@ -21,9 +24,11 @@ class ButtonCreation(tk.Frame):
 
     # self.custom_font = tkFont.Font(family='pix M 8pt', size=12)
 
-    def create_button(self, text, width, height):
+    def create_button(self, text, bg_color, width, height):
         # Using the width and height parameters for button size
-        inner_frame = tk.Frame(self, bg='#c0c0c0', width=width, height=height)
+        # inner_frame = tk.Frame(self, bg='#c0c0c0', width=width, height=height)
+        inner_frame = tk.Frame(self, bg=bg_color, width=width, height=height)
+
         inner_frame.pack_propagate(False)
         inner_frame.pack(expand=True, fill='both', padx=2, pady=2)
 
@@ -42,11 +47,23 @@ class ButtonCreation(tk.Frame):
         self.bottom_border = tk.Frame(inner_frame, bg=black, height=2)
         self.bottom_border.pack(side='bottom', fill='x')
 
-        self.text_label = tk.Label(inner_frame, text=text, bg='#c0c0c0', fg='black', font=self.custom_font)
+        # self.text_label = tk.Label(inner_frame, text=text, bg='#c0c0c0', fg='black', font=self.custom_font)
+        self.text_label = tk.Label(inner_frame, text=text, bg=bg_color, fg='black', font=self.custom_font)
         self.text_label.pack(expand=True, fill='both', padx=10, pady=5)
+
+        self.bind('<Enter>', self.on_hover)  # Bind the hover event
+        self.bind('<Leave>', self.on_leave)  # Bind the leave event
 
         self.bind('<Button-1>', self.on_click)
         self.text_label.bind('<Button-1>', self.on_click)
+
+    def on_hover(self, event):
+        # Lighten the button's background color to simulate a translucent overlay
+        self.configure(bg='#6699FF')  # A lighter shade of blue for hover effect
+
+    def on_leave(self, event):
+        # Revert the button's background color to its original state
+        self.configure(bg='black')
 
     def create_dark_blue_rectangle(self, text, width, height):
         # Create a frame for the rectangle with the specified width and height
@@ -61,6 +78,8 @@ class ButtonCreation(tk.Frame):
     def on_click(self, event):
         if self.command:
             self.command()
+
+
 
     def set_command(self, command):
         self.command = command

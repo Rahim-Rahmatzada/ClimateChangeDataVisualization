@@ -9,7 +9,7 @@ class ChartUI(tk.Frame):
         self.menu_ui = menu_ui_instance
         self.root = parent
 
-        self.title_bar = TitleBar(self.root, "Chart Title", close_command, self.show_menu_ui)
+        self.title_bar = TitleBar(self.root, "", close_command, self.show_menu_ui)
         self.pack(fill="both", expand=True)
 
     def show_menu_ui(self):

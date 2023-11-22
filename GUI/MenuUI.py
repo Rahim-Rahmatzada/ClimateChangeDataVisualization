@@ -8,7 +8,7 @@ class MenuUI(tk.Frame):
     def __init__(self, root, close_command):
         super().__init__(root, bg='#D4D0C8')
         self.root = root
-        self.title_bar = TitleBar(self.root, "Menu Title", close_command)
+        self.title_bar = TitleBar(self.root, "", close_command)
 
         self.root.geometry("1200x700")
 
@@ -25,15 +25,22 @@ class MenuUI(tk.Frame):
         self.button_frame.place(relx=0.5, rely=0.6, anchor='center')
 
     def create_buttons(self):
-        button_specs = [("GRAPHS", 250, 100), ("PIE CHARTS", 250, 100), ("MAPS", 250, 100)]
-        for text, width, height in button_specs:
+        button_specs = [
+            ("GRAPHS", '#c0c0c0', 250, 100),
+            ("PIE CHARTS", '#c0c0c0', 250, 100),
+            ("MAPS", '#c0c0c0', 250, 100)
+        ]
+        for text, bg_color, width, height in button_specs:
             button = ButtonCreation(self.button_frame)
-            if text == "GRAPHS":
-                button.set_command(self.show_graph_ui)  # Set the command for the GRAPHS button
-            else:
-                button.set_command(self.on_button_click)  # You can define different commands for each button
-            button.create_button(text, width, height)
+            button.create_button(text, bg_color, width, height)  # Correct order of arguments
             button.pack(pady=10)
+            # Set the command for each button
+            if text == "GRAPHS":
+                button.set_command(self.show_graph_ui)
+            elif text == "PIE CHARTS":  # You might want to add specific commands for each button
+                button.set_command(self.on_button_click)  # Placeholder for actual command
+            elif text == "MAPS":
+                button.set_command(self.on_button_click)  # Placeholder for actual command
 
     def show_graph_ui(self):
         self.title_bar.destroy()  # Destroy the current title bar
@@ -42,10 +49,18 @@ class MenuUI(tk.Frame):
         self.chart_ui.pack(fill='both', expand=True)
 
     def show_menu_ui(self):
-        # This method should re-show the MenuUI frame
+        # Destroy any existing title bar and chart UI before recreating the menu UI
+        if hasattr(self, 'title_bar'):
+            self.title_bar.destroy()
         if hasattr(self, 'chart_ui'):
-            self.chart_ui.pack_forget()
+            self.chart_ui.destroy()
+
+        # Recreate the title bar for the menu UI
+        self.title_bar = TitleBar(self.root, "", self.root.destroy)
+        self.title_bar.pack(side="top", fill="x")  # Make sure to pack the title bar
+
         self.pack(fill='both', expand=True)
+        # Recreate the menu UI components as necessary
 
     def create_rectangle_frame(self):
         self.rectangle_frame = tk.Frame(self.root, bg='#D4D0C8')

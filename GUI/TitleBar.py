@@ -15,14 +15,14 @@ class TitleBar(tk.Frame):
         # Close button
         self.close_button_creator = ButtonCreation(self)
         self.close_button_creator.set_command(close_command)
-        self.close_button_creator.create_button('X', width=50, height=50)
+        self.close_button_creator.create_button('X', '#c0c0c0', width=50, height=50)  # Add 'darkblue' as the bg color
         self.close_button_creator.pack(side="right", padx=10)
 
         # Menu button (if provided)
         if menu_command:
             self.menu_button_creator = ButtonCreation(self)
             self.menu_button_creator.set_command(menu_command)
-            self.menu_button_creator.create_button('MENU', width=100, height=50)
+            self.menu_button_creator.create_button('MENU', '#c0c0c0', width=100, height=50)  # Add 'darkblue' as the bg color
             self.menu_button_creator.pack(side="right", padx=10)
 
             # Window dragging functionality

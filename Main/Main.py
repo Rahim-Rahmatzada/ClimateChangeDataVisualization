@@ -8,11 +8,9 @@ class MainUI:
     def __init__(self):
         self.root = tk.Tk()
         self.root.geometry("1200x700")
-        self.root.configure(bg='#D4D0C8')
 
         # Initialize MenuUI and ChartUI without creating a TitleBar inside them
         self.menu_ui = MenuUI(self.root, self.close_application)
-
 
         # Start with showing the MenuUI
         self.menu_ui.pack(fill='both', expand=True)
