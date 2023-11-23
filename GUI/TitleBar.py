@@ -6,6 +6,8 @@ class TitleBar(tk.Frame):
     def __init__(self, root, title, close_command, menu_command=None, bg='darkblue', fg='white'):
         super().__init__(root, bg=bg)
         self.root = root
+        self.xwin = None  # Initialize attribute
+        self.ywin = None  # Initialize attribute
         self.pack(side="top", fill="x")
 
         # Title label
@@ -34,4 +36,6 @@ class TitleBar(tk.Frame):
         self.ywin = event.y
 
     def move_window(self, event):
-        self.root.geometry(f'+{event.x_root - self.xwin}+{event.y_root - self.ywin}')
+        # Check if the attributes are set before using them
+        if self.xwin is not None and self.ywin is not None:
+            self.root.geometry(f'+{event.x_root - self.xwin}+{event.y_root - self.ywin}')

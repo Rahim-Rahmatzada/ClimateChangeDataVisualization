@@ -1,6 +1,5 @@
 import tkinter as tk
 from GUI.MenuUI import MenuUI
-from GUI.ChartUI import ChartUI
 
 
 class MainUI:

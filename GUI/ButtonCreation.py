@@ -9,8 +9,10 @@ class ButtonCreation(tk.Frame):
         super().__init__(master, bg='black', **kwargs)
         self.custom_font = self.load_custom_font('Fonts', 'w-95-sans-serif.ttf', 12)
 
-        self.bind('<Enter>', self.on_hover)
-        self.bind('<Leave>', self.on_leave)
+        self.command = None  # Add a command attribute to store the button's action
+
+        # self.bind('<Enter>', self.on_hover)
+        # self.bind('<Leave>', self.on_leave)
 
     def load_custom_font(self, font_folder, font_filename, size):
         # First, we register the custom font with the system
@@ -79,7 +81,24 @@ class ButtonCreation(tk.Frame):
         if self.command:
             self.command()
 
+    def create_boxes(self, bg_color, width, height):
+        # Create a frame for the box with the specified width and height
+        box_frame = tk.Frame(self, bg=bg_color, width=width, height=height)
+        box_frame.pack_propagate(False)  # Prevents the frame from resizing to fit its contents
+        box_frame.pack(expand=True, fill='both', padx=2, pady=2)
 
+        # Bevel effect
+        left_border = tk.Frame(box_frame, bg='white', width=2)
+        left_border.pack(side='left', fill='y')
+
+        right_border = tk.Frame(box_frame, bg='black', width=2)
+        right_border.pack(side='right', fill='y')
+
+        top_border = tk.Frame(box_frame, bg='white', height=2)
+        top_border.pack(side='top', fill='x')
+
+        bottom_border = tk.Frame(box_frame, bg='black', height=2)
+        bottom_border.pack(side='bottom', fill='x')
 
     def set_command(self, command):
         self.command = command
