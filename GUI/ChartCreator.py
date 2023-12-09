@@ -18,19 +18,19 @@ class ChartCreator:
         self.canvas = FigureCanvasTkAgg(self.figure, master=self.master)
         self.canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.NONE, expand=False, pady=10)
 
-    def plot_data(self, data, date_range, variable_type, background_color='#D4D0C8'):
-        # Convert ordinal dates to datetime objects
-        dates = [datetime.fromordinal(int(ordinal_date)) for ordinal_date in date_range]
-
+    def plot_data(self, data, dates, variable_type, background_color='#D4D0C8'):
         # Clear the previous plot
         self.subplot.clear()
         self.subplot.set_facecolor(background_color)
 
         # Plot the data
-        self.subplot.plot(dates, data)
+        self.subplot.plot(dates, data, 'o-')  # 'o-' for a line plot with circles
 
         # Set the title for the plot
         self.subplot.set_title(variable_type)
+
+        # Format the x-axis to show dates properly
+        self.figure.autofmt_xdate()
 
         # Redraw the canvas
         self.canvas.draw()

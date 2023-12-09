@@ -43,8 +43,4 @@ class WeatherDataProcessing:
         return self.terrestrial_radiation_data
 
 
-# Example usage:
-# api_response = '{"daily": {"temperature_2m_mean": [10.5, null, 13.2], "precipitation_sum": [0, 5.1, null]}, ' \
-#                '"hourly": {"shortwave_radiation": [120, 130, 110], "terrestrial_radiation": [5, 7, 6]}} '
-# weather_data = WeatherDataProcessing(api_response)
-# print(weather_data.get_temperature_data_as_list())
+

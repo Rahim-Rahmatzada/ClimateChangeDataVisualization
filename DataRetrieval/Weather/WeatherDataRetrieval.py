@@ -32,7 +32,7 @@ class WeatherDataRetrieval:
         return response.text
 
 
-# Example usage:
+# # Example usage:
 # weather_retrieval = WeatherDataRetrieval("51.509865", "-0.118092", "2021-09-01", "2021-09-10")
 # try:
 #     data = weather_retrieval.fetch_data()
