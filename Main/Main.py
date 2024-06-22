@@ -1,8 +1,13 @@
 import tkinter as tk
 from GUI.MenuUI import MenuUI
+from GUI.FontManager import FontManager
 
 
 class MainUI:
+    """
+    The main user interface class that manages the overall application window and its components.
+    It creates instances of MenuUI and ChartUI, and handles the switching between them.
+    """
 
     def __init__(self):
         self.root = tk.Tk()
@@ -15,6 +20,7 @@ class MainUI:
         self.menu_ui.pack(fill='both', expand=True)
 
         # Additional setup can go here...
+        FontManager.load_custom_font('Fonts', 'w-95-sans-serif.ttf', 12)
 
         self.root.mainloop()
 

@@ -2,6 +2,12 @@ import requests
 
 
 class WeatherDataRetrieval:
+    """
+    A class for retrieving weather data from the Open-Meteo API.
+    It constructs the API URL based on the provided latitude, longitude, start date, and end date.
+    The class fetches the data from the API and returns the response as text.
+    """
+
     BASE_URL = "https://archive-api.open-meteo.com/v1/archive"
 
     def __init__(self, latitude, longitude, start_date, end_date):

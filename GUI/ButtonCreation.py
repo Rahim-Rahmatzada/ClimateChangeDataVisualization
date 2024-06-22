@@ -5,6 +5,11 @@ import os
 
 
 class ButtonCreation(tk.Frame):
+    """
+    A custom button creation class that inherits from tk.Frame.
+    It provides methods to create buttons with custom styles and functionality.
+    """
+
     def __init__(self, master, **kwargs):
         super().__init__(master, bg='black', **kwargs)
         self.custom_font = self.load_custom_font('Fonts', 'w-95-sans-serif.ttf', 12)
@@ -99,6 +104,7 @@ class ButtonCreation(tk.Frame):
 
         bottom_border = tk.Frame(box_frame, bg='black', height=2)
         bottom_border.pack(side='bottom', fill='x')
+
 
     def set_command(self, command):
         self.command = command

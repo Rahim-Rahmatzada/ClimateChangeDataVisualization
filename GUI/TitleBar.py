@@ -3,6 +3,12 @@ from GUI.ButtonCreation import ButtonCreation
 
 
 class TitleBar(tk.Frame):
+    """
+    A custom title bar class that inherits from tk.Frame.
+    It provides a title label, close button, and optional menu button.
+    The class also supports window dragging functionality.
+    """
+
     def __init__(self, root, title, close_command, menu_command=None, bg='darkblue', fg='white'):
         super().__init__(root, bg=bg)
         self.root = root

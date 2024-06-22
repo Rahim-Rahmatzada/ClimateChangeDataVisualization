@@ -5,6 +5,12 @@ from GUI.TitleBar import TitleBar
 
 
 class MenuUI(tk.Frame):
+    """
+    A user interface class representing the main menu.
+    It creates and arranges various UI components such as buttons and rectangles.
+    The class inherits from tk.Frame and uses instances of ButtonCreation and TitleBar.
+    """
+
     def __init__(self, root, close_command):
         super().__init__(root, bg='#D4D0C8')
         self.root = root

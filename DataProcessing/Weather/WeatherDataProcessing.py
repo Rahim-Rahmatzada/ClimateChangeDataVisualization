@@ -2,6 +2,12 @@ import json
 
 
 class WeatherDataProcessing:
+    """
+    A class for processing weather data obtained from the API response.
+    It parses the JSON response and extracts the relevant data fields.
+    The class provides methods to retrieve the data as lists of floats or access the raw JSON arrays.
+    """
+
     def __init__(self, api_response):
         # Parse the JSON response
         obj = json.loads(api_response)
