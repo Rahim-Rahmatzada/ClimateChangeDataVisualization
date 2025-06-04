@@ -43,8 +43,8 @@ You can install the required Python packages using pip
 - `DataRetrieval/WeatherDataRetrieval.py`: Contains the `WeatherDataRetrieval` class for retrieving weather data from the API.
 - `DataProcessing/WeatherDataProcessing.py`: Contains the `WeatherDataProcessing` class for processing the retrieved weather data.
 
-![](images/image.png)
-![](images/image1.png)
+![](Images/image.png)
+![](Images/image1.png)
 
 ## License
 
